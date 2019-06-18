@@ -1,13 +1,15 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Magic Home Controller</title>
 </head>
+
 <body>
     <h1>Magic home Controller</h1>
-    
+
     <form>
         <input type="color" name="color" id="color">
         <input type="button" value="Test API connection" id="submit">
@@ -17,27 +19,39 @@
         document.getElementById('submit').addEventListener('click', submit);
 
         function submit() {
-           
+
+            let color = hexToRgb(document.getElementById('color').value);
+
             let data = {
-                ip : '192.168.1.2',
-                color : {
-                    r : 255,
-                    g : 10,
-                    b : 15
+                ip: '192.168.1.2',
+                color: {
+                    r: color.r,
+                    g: color.g,
+                    b: color.b
                 },
-                brightness : 255
+                brightness: 255
             };
 
             console.log(data);
 
             post('/api', data);
-            
+
+        }
+
+        //Hex to RGB
+        function hexToRgb(hex) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
         }
 
         //Post Method
         const Http = new XMLHttpRequest();
 
-        function post(route, dataToPost){
+        function post(route, dataToPost) {
             console.log('attempting post');
 
             let data = JSON.stringify(dataToPost);
@@ -51,4 +65,5 @@
         }
     </script>
 </body>
+
 </html>
