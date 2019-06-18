@@ -11,6 +11,7 @@
     <h1>Magic home Controller</h1>
 
     <form>
+        <input type="text" name="ip" id="ip">
         <input type="color" name="color" id="color">
         <input type="button" value="Test API connection" id="submit">
     </form>
@@ -20,10 +21,11 @@
 
         function submit() {
 
-            let color = hexToRgb(document.getElementById('color').value);
+            let ip = document.getElementById('ip').value,
+                color = hexToRgb(document.getElementById('color').value);
 
             let data = {
-                ip: '192.168.1.2',
+                ip: ip,
                 color: {
                     r: color.r,
                     g: color.g,
