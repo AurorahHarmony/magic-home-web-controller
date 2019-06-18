@@ -26,7 +26,7 @@ app.post('/api', (req, res) => {
     let data = req.body;
     let light = new Control(data.ip);
 
-    light.setColor(5, 10, 10).then(success => {
+    light.setColor(data.color.r, data.color.g, data.color.b).then(success => {
         if (success) {
             res.send('Success');
         } else {
