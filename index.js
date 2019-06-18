@@ -27,12 +27,11 @@ app.post('/api', (req, res) => {
     let light = new Control(data.ip);
 
     light.setColor(data.color.r, data.color.g, data.color.b).then(success => {
-        if (success) {
             res.send('Success');
-        } else {
-            res.send('Failed');
-        }
-    });
+    }).catch(error => {
+        console.log('caught', error.message);
+        res.send('Failed: ' + error.message );
+    });;
 
 })
 
