@@ -28,7 +28,25 @@
             };
 
             console.log(data);
+
+            post('/api', data);
             
+        }
+
+        //Post Method
+        const Http = new XMLHttpRequest();
+
+        function post(route, dataToPost){
+            console.log('attempting post');
+
+            let data = JSON.stringify(dataToPost);
+
+            Http.open("POST", route);
+            Http.setRequestHeader("Content-Type", "application/json");
+            Http.send(data);
+            Http.onload = (e) => {
+                console.log(Http.responseText);
+            }
         }
     </script>
 </body>

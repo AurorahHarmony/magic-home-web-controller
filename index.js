@@ -26,10 +26,16 @@ light.setColor(255, 10, 10).then(success => {
         console.log('light is not pink');
     }
 });
+
 //Server Routes
 app.get('/', (req, res) => {
     res.sendFile(staticDir + '/index.html');
 });
+
+app.post('/api', (req, res) => {
+    console.log(req.body);
+    res.send('pong');
+})
 
 app.listen(port, () => {
     console.log('Server has been started on ' + port);
