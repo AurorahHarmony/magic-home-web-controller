@@ -1,7 +1,6 @@
 //Server Settings
 const port = 8080;
 const staticDir = __dirname + '/static';
-const lightIp = '192.168.1.2';
 
 //Initialize Express Requirements
 const express = require('express');
@@ -17,24 +16,24 @@ const {
     Control
 } = require('magic-home');
 
-let light = new Control(lightIp);
-
-light.setColor(255, 10, 10).then(success => {
-    if (success) {
-        console.log('light is pink');
-    } else {
-        console.log('light is not pink');
-    }
-});
-
 //Server Routes
 app.get('/', (req, res) => {
     res.sendFile(staticDir + '/index.html');
 });
 
 app.post('/api', (req, res) => {
-    console.log(req.body);
-    res.send('pong');
+
+    let data = req.body;
+    let light = new Control(data.ip);
+
+    light.setColor(5, 10, 10).then(success => {
+        if (success) {
+            res.send('Success');
+        } else {
+            res.send('Failed');
+        }
+    });
+
 })
 
 app.listen(port, () => {
