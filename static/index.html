@@ -11,5 +11,13 @@
     <form>
         <input type="button" value="Test API connection" id="submit">
     </form>
+
+    <script>
+        document.getElementById('submit').addEventListener('click', submit);
+
+        function submit() {
+            console.log('Submit was clicked');
+        }
+    </script>
 </body>
 </html>
